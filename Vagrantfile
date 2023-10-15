@@ -63,10 +63,15 @@ cd ${HOME}/docker-stack/haproxy
 cp /home/vagrant/wargame1/haproxy/docker-compose.yml  ${HOME}/docker-stack/haproxy/docker-compose.yml
 echo 'ENDPOINT="bastion.esd37.com"' >${HOME}/docker-stack/haproxy/.env
 chown -R ${USER}:${USER} ${HOME}/docker-stack/
+
+mkdir -p ${HOME}/docker-stack/wordpress
+cp home/vagrant/wargame1/wordpress/ ${HOME}/docker-stack/wordpress -r
+
+##-------------------------wp------------------
+
 docker compose -f ${HOME}/docker-stack/haproxy/docker-compose.yml up -d
 docker compose -f ${HOME}/docker-stack/guacamole/docker-compose.yml up -d
-mkdir -p ${HOME}/docker-stack/wordpress
-cp home/vagrant/wargame1/wordpress/docker-compose.yml ${HOME}/docker-stack/wordpress
+docker compose -f ${HOME}/docker-stack/wordpress/docker-compose.yml up -d
 
     echo "All installations completed."
   SHELL
