@@ -3,12 +3,12 @@ version: '3.9'
 # networks
 # create a network 'guacamole_net' in mode 'bridged'
 networks:
-  guacamole_net:
-    driver: bridge
   haproxy_net:
     external: true
   pivot_net:
-    driver: bridge
+    external: true
+  guacamole_net:
+    external: true
 
 # services
 services:
