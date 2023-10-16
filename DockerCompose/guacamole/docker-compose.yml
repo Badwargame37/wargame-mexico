@@ -7,6 +7,8 @@ networks:
     driver: bridge
   haproxy_net:
     external: true
+  pivot_net:
+    driver: bridge
 
 # services
 services:
@@ -56,6 +58,7 @@ services:
     networks:
       - guacamole_net
       - haproxy_net
+      - pivot_net
     restart: always
     volumes:
     - ./drive:/drive:rw

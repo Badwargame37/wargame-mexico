@@ -3,7 +3,7 @@ networks:
   wordpress_internal_net:
     driver: bridge
   challenge_net:
-    external: bridge
+    external: true
 services:
   wp:
     image: wordpress:latest
@@ -35,6 +35,8 @@ services:
     volumes:
       - ./config/php.conf.ini:/usr/local/etc/php/conf.d/conf.ini
       - ./wp-app:/var/www/html
+    networks:
+      wordpress_internal_net:
     environment:
       WORDPRESS_DB_HOST: db
       WORDPRESS_DB_NAME: "${DB_NAME}"
@@ -56,6 +58,8 @@ services:
       UPLOAD_LIMIT: 50M
       VIRTUAL_HOST: phpmyadmin.esd37.com
       LETSENCRYPT_HOST: phpmyadmin.esd37.com
+    networks:
+      wordpress_internal_net:
     expose:
       - 8081
     links:
@@ -78,6 +82,8 @@ services:
       MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
       MYSQL_USER: "${DB_USER_NAME}"
       MYSQL_PASSWORD: "${DB_USER_PASSWORD}"
+    networks:
+      wordpress_internal_net:
   nginx:
     container_name: nginx
     image: nginxproxy/nginx-proxy
@@ -94,5 +100,8 @@ services:
         options:
             max-size: "10m"
             max-file: "3"
+    networks:
+      wordpress_internal_net:
+      challenge_net:
 volumes:
   db_data:
