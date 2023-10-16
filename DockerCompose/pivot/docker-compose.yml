@@ -3,7 +3,8 @@ networks:
   pivot_net:
     external: true
   challenge_net:
-    external: bridge
+    external: true
+
 services:
   ubuntu:
     image: ubuntu:latest
