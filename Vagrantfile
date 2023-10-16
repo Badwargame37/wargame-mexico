@@ -51,28 +51,65 @@ sudo usermod -a ${USER} -G docker
     # Optionally, you can set up a Kubernetes cluster using kubeadm here
 	mkdir ${HOME}/docker-stack
 cd ${HOME}/docker-stack
+
+
+cd  ${HOME}/docker-stack/
+docker network create --driver=bridge --subnet=192.168.191.0/24 pivot_net
+
+docker network create --driver=bridge challenge_net
+docker network create --driver=bridge guacamole_net
+docker network create --driver=bridge haproxy_net
+docker network create --driver=bridge wordpress_internal_net
+
+git clone https://github.com/Badwargame37/wargame-mexico.git
+
+
+####################gucaomole
 mkdir -p ${HOME}/docker-stack/guacamole/init
 chmod -R +x ${HOME}/docker-stack/guacamole/init
 docker run --rm guacamole/guacamole:1.5.0 /opt/guacamole/bin/initdb.sh --postgres > ${HOME}/docker-stack/guacamole/init/initdb.sql
-cp /home/vagrant/wargame1/Chal1/docker-compose.yml  ${HOME}/docker-stack/guacamole/docker-compose.yml
+cp ${HOME}/docker-stack/wargame-mexico/DockerCompose/guacamole/docker-compose.yml  ${HOME}/docker-stack/guacamole/docker-compose.yml
 
-echo "POSTGRES_PASSWORD='PleasePutAStrongPasswordHere'123" >${HOME}/docker-stack/guacamole/.env 
-echo "POSTGRES_USER='guacamole_user'" >${HOME}/docker-stack/guacamole/.env 
+echo "POSTGRES_PASSWORD='PleasePutAStrongPasswordHere123'" >${HOME}/docker-stack/guacamole/.env 
+echo "POSTGRES_USER='guacamole_user'" >>${HOME}/docker-stack/guacamole/.env 
+
+####################HA  Proxy
 mkdir -p ${HOME}/docker-stack/haproxy
 cd ${HOME}/docker-stack/haproxy
-cp /home/vagrant/wargame1/haproxy/docker-compose.yml  ${HOME}/docker-stack/haproxy/docker-compose.yml
+cp ${HOME}/docker-stack/wargame-mexico/DockerCompose/haproxy/docker-compose.yml  ${HOME}/docker-stack/haproxy/docker-compose.yml
+cp ${HOME}/docker-stack/wargame-mexico/DockerCompose/haproxy/haproxy.cfg  ${HOME}/docker-stack/haproxy/haproxy.cfg
 echo 'ENDPOINT="bastion.esd37.com"' >${HOME}/docker-stack/haproxy/.env
 chown -R ${USER}:${USER} ${HOME}/docker-stack/
 
+
+####################wordpress
 mkdir -p ${HOME}/docker-stack/wordpress
-cp home/vagrant/wargame1/wordpress/ ${HOME}/docker-stack/wordpress -r
+cp ${HOME}/docker-stack/wargame-mexico/DockerCompose/wordpress  ${HOME}/docker-stack/ -r
+g++ -o ${HOME}/docker-stack/wargame-mexico/DockerCompose/Reverse/rbash ${HOME}/docker-stack/wargame-mexico/DockerCompose/Reverse/rbash.cpp
 
 ##-------------------------wp------------------
+#docker compose -f ${HOME}/docker-stack/haproxy/docker-compose.yml up -d
+#docker compose -f ${HOME}/docker-stack/guacamole/docker-compose.yml up -d
+#docker compose -f ${HOME}/docker-stack/wordpress/docker-compose.yml up -d
+#cp gua${HOME}/docker-stack/wargame-mexico/DockerCompose/Complet ${HOME}/docker-stack/ -r
 
+
+cd wargame-mexico
+docker compose -f ${HOME}/docker-stack/wargame-mexico/DockerCompose/network-config.yml up -d
 docker compose -f ${HOME}/docker-stack/haproxy/docker-compose.yml up -d
 docker compose -f ${HOME}/docker-stack/guacamole/docker-compose.yml up -d
 docker compose -f ${HOME}/docker-stack/wordpress/docker-compose.yml up -d
+docker compose -f ${HOME}/docker-stack/wargame-mexico/DockerCompose/Reverse/docker-compose.yml up -d
+docker compose -f ${HOME}/docker-stack/wargame-mexico/DockerCompose/pivot/docker-compose.yml up -d
+docker-compose -f ${HOME}/docker-stack/wargame-mexico/DockerCompose/pivot/docker-compose.yml down
+docker-compose -f ${HOME}/docker-stack/wargame-mexico/DockerCompose/pivot/docker-compose.yml up -d
 
+
+docker compose -f ${HOME}/docker-stack/haproxy/docker-compose.yml ps
+docker compose -f ${HOME}/docker-stack/guacamole/docker-compose.yml ps
+docker compose -f ${HOME}/docker-stack/wordpress/docker-compose.yml ps
+docker compose -f ${HOME}/docker-stack/wargame-mexico/DockerCompose/Reverse/docker-compose.yml ps
+docker compose -f ${HOME}/docker-stack/wargame-mexico/DockerCompose/pivot/docker-compose.yml ps
     echo "All installations completed."
   SHELL
 end
