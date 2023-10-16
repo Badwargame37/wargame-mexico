@@ -1,18 +1,27 @@
+
+
 function submitPassword() {
-    const password = document.getElementById('password').value;
+    const passwords = [
+        document.getElementById('password1').value,
+        document.getElementById('password2').value,
+        document.getElementById('password3').value,
+        document.getElementById('password4').value
+    ];
+
     fetch('/submit', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({password: password}),
+        body: JSON.stringify({passwords: passwords}),
     })
     .then(response => response.json())
     .then(data => {
         if (data.success) {
             alert('Félicitations! Votre DNS est: ' + data.dns);
+            console.log('Contenu de notes.txt:', data.content);  // Vous pouvez également l'afficher d'une autre manière
         } else {
-            alert('Mot de passe incorrect, essayez à nouveau.');
+            alert('Un ou plusieurs mots de passe sont incorrects, essayez à nouveau.');
         }
     });
 }
