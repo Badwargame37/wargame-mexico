@@ -15,6 +15,6 @@ services:
     environment:
       ENDPOINT: '${ENDPOINT}'
 networks:
-  haproxy_net:
-    name: haproxy_net
-    driver: bridge
+   haproxy_net:
+    external: true
+    name: haproxy_net  
