@@ -1,0 +1,14 @@
+version: '3.8'
+networks:
+  wordpress_internal_net:
+    driver: bridge
+  challenge_net:
+    external: bridge
+services:
+  level0:
+    build:
+      context: ./level0
+      dockerfile: Dockerfile
+    ports:
+      - "127.0.0.1:8080:8080"
+    restart: always 
