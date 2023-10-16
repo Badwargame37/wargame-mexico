@@ -11,7 +11,7 @@ services:
     networks:
       challenge_net:
       pivot_net:
-        ipv4_address: 192.168.190.17
+        ipv4_address: 192.168.191.17
     restart: always
     command: sh -c "apt-get update && apt-get install -y openssh-server g++ && useradd -m abricot && echo 'abricot:voldemort' | chpasswd && sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config && wget -O /opt/chisel.gz https://github.com/jpillora/chisel/releases/download/v1.9.1/chisel_1.9.1_linux_amd64.gz && gunzip /opt/chisel.gz && chmod +x /opt/chisel && g++ -o /opt/rbash /opt/rbash.cpp && chmod +x /opt/rbash && usermod -s /opt/rbash abricot && service ssh start && tail -f /dev/null"
     ports:
