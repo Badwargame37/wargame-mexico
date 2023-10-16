@@ -1,3 +1,5 @@
+from flask import render_template
+
 from flask import Flask, request, jsonify
 from werkzeug.security import check_password_hash
 from flask_limiter import Limiter
