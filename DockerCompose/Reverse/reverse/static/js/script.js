@@ -1,31 +1,25 @@
-
-
-function submitPassword() {
-    const passwords = [
-        document.getElementById('password1').value,
-        document.getElementById('password2').value,
-        document.getElementById('password3').value,
-        document.getElementById('password4').value
-    ];
-
+function submitPasswords() {
+    const passwords = Array.from(document.querySelectorAll('.password-input')).map(input => input.value);
+    
     fetch('/submit', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({passwords: passwords}),
+        body: JSON.stringify({ passwords: passwords }),
     })
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            alert('Félicitations! Votre DNS est: ' + data.dns);
-            console.log('Contenu de notes.txt:', data.content);  // Vous pouvez également l'afficher d'une autre manière
+            alert('Congratulations! Your DNS is: ' + data.dns);
+            alert('Content from notes.txt: ' + data.content);
         } else {
-            alert('Un ou plusieurs mots de passe sont incorrects, essayez à nouveau.');
+            alert('Failed: ' + data.reason);
         }
     });
 }
+
 document.addEventListener('DOMContentLoaded', (event) => {
     const submitButton = document.getElementById('submit-button');
-    submitButton.addEventListener('click', submitPassword);
+    submitButton.addEventListener('click', submitPasswords);
 });
