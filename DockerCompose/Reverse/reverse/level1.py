@@ -1,9 +1,10 @@
-from utils import get_remote_address
 from flask import Flask, request, jsonify
 from werkzeug.security import check_password_hash
 from flask_limiter import Limiter
 import os
 
+def get_remote_address():
+    return request.remote_addr
 app = Flask(__name__)
 limiter = Limiter(app, key_func=get_remote_address)
 
