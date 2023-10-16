@@ -9,7 +9,7 @@ services:
       context: ./reverse
       dockerfile: Dockerfile
     ports:
-      - 8888:8080"
+      - 8888:8888
     restart: always 
     networks:
       challenge_net:
