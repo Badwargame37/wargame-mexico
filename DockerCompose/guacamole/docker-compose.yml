@@ -16,8 +16,8 @@ services:
   guacd:
     container_name: guacamole_backend
     image: guacamole/guacd:1.5.0
-    networks:
-     - guacamole_net
+   networks:
+      guacamole_net: 
       pivot_net:
         ipv4_address: 192.168.191.10
     restart: always
