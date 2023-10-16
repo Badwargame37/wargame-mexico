@@ -1,9 +1,0 @@
-/mon_projet
-    /static
-        /css
-            style.css
-        /js
-            script.js
-    /templates
-        index.html
-    app.py
