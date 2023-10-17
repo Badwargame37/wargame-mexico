@@ -12,10 +12,10 @@ int main() {
         std::cout << "rbash$ ";
         std::getline(std::cin, input);
 
-        if (input == "commande get-ip") {
+        if (input == "get-ip") {
             executeCommand("hostname -I");
         } 
-        else if (input.substr(0, 14) == "commande chisel") {
+        else if (input.substr(0, 14) == "chisel") {
             std::string chiselArgs = input.substr(15);
             executeCommand("/opt/chisel " + chiselArgs);
         } 
