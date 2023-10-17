@@ -1,0 +1,76 @@
+/* Basic layout */
+body {
+    font-family: 'Helvetica', sans-serif;
+    background-color: #1a1a1a;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #151515;
+    text-align: center;
+    padding: 20px;
+}
+
+header img {
+    width: 480px;
+}
+
+header h1 {
+    font-size: 2.5em;
+}
+
+/* Character views */
+.character-view {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: 10px;
+    border-radius: 5px;
+}
+
+.character-view img {
+    width: 50px;
+    margin-right: 20px;
+}
+
+/* Input Wrapper */
+.input-wrapper {
+    text-align: center;
+    margin: 20px;
+}
+
+.password-input {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+#submit-button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Footer */
+footer {
+    background-color: #151515;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.download-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+}

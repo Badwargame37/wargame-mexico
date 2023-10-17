@@ -1,15 +1,9 @@
-version: '3.8'
-networks:
-  challenge_net:
-    external: true
-    name: challenge_net 
+version: '3'
+
 services:
-  reverse:
-    build:
-      context: ./reverse
-      dockerfile: Dockerfile
+  web:
+    build: .
     ports:
-      - 8888:8888
-    restart: always 
-    networks:
-      challenge_net:
+      - "8888:8888"
+    environment:
+      - HASHED_PASSWORDS=your_hashed_passwords_here

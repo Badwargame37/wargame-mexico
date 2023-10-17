@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SG-1: Debate on Reverse Engineering</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+</head>
+<body>
+
+    <header>
+        <img src="{{url_for('static', filename='images/sg1_logo.jpg')}}" alt="SG-1 Logo">
+        <h1>SG-1: Debate on Reverse Engineering</h1>
+    </header>
+
+    <main>
+        <section class="debate-section">
+            <h2>SG-1 Discusses the Merits of Reverse Engineering</h2>
+
+            <article class="character-view carter-view">
+                <img src="{{url_for('static', filename='images/carter.jpg')}}" alt="Carter">
+                <p>"Reverse engineering is the cornerstone of understanding advanced technologies."</p>
+            </article>
+
+            <article class="character-view oneill-view">
+                <img src="{{url_for('static', filename='images/oneill.jpg')}}" alt="O'Neill">
+                <p>"Like figuring out how a stone ring can make a splashy puddle to another planet?"</p>
+            </article>
+            <article class="character-view daniel-view">
+                <img src="{{url_for('static', filename='images/daniel.jpg')}}" alt="O'Neill">
+                <p>Daniel: "It's more than that. It's about building a bridge between our world and theirs."</p>
+            </article>
+
+            <article class="character-view tealc-view"> 
+                <img src="{{url_for('static', filename='images/tealc.jpg')}}" alt="O'Neill">
+                <p>Teal'c: "Indeed. But one must be cautious, for not all technologies are beneficial."</p>
+            </article>
+            
+            <article class="character-view carter-view">
+                <img src="{{url_for('static', filename='images/carter.jpg')}}" alt="Carter">
+                <p>Carter: "True, but it’s the science that makes it possible for us to go where we’ve never gone before. Literally."</p>
+            </article>
+            <!-- Add other character views here -->
+        </section>
+
+        <section class="input-wrapper">
+            <input type="text" id="password1" class="password-input" placeholder="Enter the 1st password">
+            <input type="text" id="password2" class="password-input" placeholder="Enter the 2nd password">
+            <input type="text" id="password3" class="password-input" placeholder="Enter the 3rd password">
+            <input type="text" id="password4" class="password-input" placeholder="Enter the 4th password">
+            <button id="submit-button" onclick="submitPasswords()">Submit</button>
+        </section>
+
+        <footer>
+            <a href="/download" class="download-button">Download the Challenge</a>
+        </footer>
+
+    </main>
+
+    <script src="{{url_for('static', filename='js/script.js')}}"></script>
+
+</body>
+</html>
